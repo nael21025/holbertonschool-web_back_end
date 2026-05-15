@@ -1,7 +1,7 @@
 import readDatabase from '../utils';
 
 export default class StudentsController {
-  static getAllStudents(request, response) {
+  static getAllStudents(_request, response) {
     const databasePath = process.argv[2];
 
     readDatabase(databasePath)

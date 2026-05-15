@@ -35,11 +35,11 @@ function getStudentsReport(path) {
 const databasePath = process.argv[2];
 const app = express();
 
-app.get('/', (request, response) => {
-  response.status(200).send('Hello Holberton School!');
+app.get('/', (_request, response) => {
+  response.status(200).type('text/plain').send('Hello Holberton School!');
 });
 
-app.get('/students', (request, response) => {
+app.get('/students', (_request, response) => {
   getStudentsReport(databasePath)
     .then((report) => {
       response.status(200).type('text/plain').send(`This is the list of our students\n${report}`);
