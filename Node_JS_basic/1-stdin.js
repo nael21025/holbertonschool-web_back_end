@@ -1,12 +1,13 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({ input: process.stdin });
+
 process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-process.stdin.resume();
-process.stdin.setEncoding('utf8');
-
-process.stdin.on('data', (data) => {
-  process.stdout.write(`Your name is: ${data.toString().trim()}\n`);
+rl.on('line', (line) => {
+  process.stdout.write(`Your name is: ${line}\n`);
 });
 
-process.stdin.on('end', () => {
+rl.on('close', () => {
   process.stdout.write('This important software is now closing\n');
 });
