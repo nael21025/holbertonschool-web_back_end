@@ -1,7 +1,7 @@
 import readDatabase from '../utils';
 
 export default class StudentsController {
-  static getAllStudents(_request, response) {
+  static getAllStudents(request, response) {
     const databasePath = process.argv[2];
 
     readDatabase(databasePath)
@@ -15,7 +15,7 @@ export default class StudentsController {
           lines.push(`Number of students in ${field}: ${groups[field].length}. List: ${groups[field].join(', ')}`);
         });
 
-        response.status(200).type('text/plain').send(lines.join('\n'));
+        response.status(200).send(lines.join('\n'));
       })
       .catch(() => {
         response.status(500).send('Cannot load the database');
@@ -34,7 +34,7 @@ export default class StudentsController {
 
     readDatabase(databasePath)
       .then((groups) => {
-        response.status(200).type('text/plain').send(`List: ${groups[major].join(', ')}`);
+        response.status(200).send(`List: ${groups[major].join(', ')}`);
       })
       .catch(() => {
         response.status(500).send('Cannot load the database');

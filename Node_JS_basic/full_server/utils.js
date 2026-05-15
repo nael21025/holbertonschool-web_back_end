@@ -1,24 +1,32 @@
 import fs from 'fs';
 
-export default function readDatabase(path) {
-  return fs.promises.readFile(path, 'utf8')
-    .then((data) => {
-      const lines = data
-        .split('\n')
-        .filter((line) => line.trim() !== '');
-      const students = lines.slice(1);
-      const groups = {};
+function readDatabase(filePath) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        reject(new Error('Cannot load the database'));
+        return;
+      }
 
-      students.forEach((studentLine) => {
-        const [firstname, , , field] = studentLine.split(',');
+      const lines = data.split('\n').filter((line) => line.trim() !== '');
+      const students = lines.slice(1).map((line) => line.split(','));
 
-        if (!groups[field]) {
-          groups[field] = [];
+      const fields = {};
+
+      students.forEach((student) => {
+        const firstname = student[0];
+        const field = student[3];
+
+        if (!fields[field]) {
+          fields[field] = [];
         }
 
-        groups[field].push(firstname);
+        fields[field].push(firstname);
       });
 
-      return groups;
+      resolve(fields);
     });
+  });
 }
+
+export default readDatabase;
