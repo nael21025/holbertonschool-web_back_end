@@ -6,9 +6,9 @@ export default class StudentsController {
 
     readDatabase(databasePath)
       .then((groups) => {
-        const fields = Object.keys(groups).sort((left, right) => left.localeCompare(right, undefined, {
-          sensitivity: 'base',
-        }));
+        const fields = Object.keys(groups).sort((a, b) => (
+          a.localeCompare(b, undefined, { sensitivity: 'base' })
+        ));
         const lines = ['This is the list of our students'];
 
         fields.forEach((field) => {
