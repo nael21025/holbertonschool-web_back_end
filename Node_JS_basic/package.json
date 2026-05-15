@@ -1,0 +1,29 @@
+{
+  "name": "node_js_basic",
+  "version": "1.0.0",
+  "description": "Holberton Node.js basic exercises",
+  "main": "0-console.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest --runInBand --passWithNoTests",
+    "full-test": "npm run lint && npm run test",
+    "dev": "nodemon --exec babel-node --presets @babel/preset-env ./full_server/server.js ./database.csv"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/node": "^7.26.0",
+    "@babel/preset-env": "^7.26.9",
+    "babel-jest": "^29.7.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
